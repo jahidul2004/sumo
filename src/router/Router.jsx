@@ -6,6 +6,7 @@ import Tasks from "../pages/tasks/Tasks";
 import Events from "../pages/diary/Diary";
 import ImportantDates from "../pages/importantDates/ImportantDates";
 import SalahStreak from "../pages/salahStreak/SalahStreak";
+import Credential from "../pages/credential/Credential";
 
 const router = createBrowserRouter([
     {
@@ -35,6 +36,10 @@ const router = createBrowserRouter([
             {
                 path: "/salahStreak",
                 element: <SalahStreak></SalahStreak>,
+            },
+            {
+                path: "/credentials",
+                element: <Credential></Credential>,
             },
         ],
     },
