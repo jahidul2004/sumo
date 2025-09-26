@@ -6,18 +6,22 @@ import {
     FaMoneyBillWave,
     FaCalendarAlt,
     FaCheckCircle,
+    FaBookOpen,
 } from "react-icons/fa";
 import {
     MdOutlineNoteAlt,
     MdAttachMoney,
     MdOutlineEventNote,
     MdHistory,
+    MdCheckCircle,
+    MdToday,
 } from "react-icons/md";
 import { IoIosTimer } from "react-icons/io";
+import { LuMessageCircleHeart } from "react-icons/lu";
+import { RiMusicAiFill } from "react-icons/ri";
 
-// --- কনস্ট্যান্টস ---
 const PRIMARY_COLOR = "#f88833";
-const PRIMARY_GRADIENT = "from-[#f88833] to-orange-400"; // গ্রেডিয়েন্ট সুন্দর করার জন্য
+const PRIMARY_GRADIENT = "from-[#f88833] to-orange-400";
 const TEXT_PRIMARY_COLOR_CLASS = "text-[#f88833]";
 
 // Glass Card Component
@@ -32,7 +36,6 @@ const GlassCard = ({ children, className = "" }) => (
     </div>
 );
 
-// --- ডেমো ডেটা এবং ফাংশনস ---
 const dailyMessages = [
     {
         id: 1,
@@ -87,7 +90,7 @@ const dailyMessages = [
 const demoData = {
     user: {
         name: "জিহাদ",
-        greeting: "শুভ সন্ধ্যা", // ডায়নামিকভাবে পরিবর্তনশীল
+        greeting: "শুভ সন্ধ্যা",
     },
     todaySummary: {
         pendingTasks: 3,
@@ -95,32 +98,6 @@ const demoData = {
         totalExpenses: 1250,
         upcomingEvents: 2,
     },
-    quickActions: [
-        {
-            title: "নতুন টাস্ক",
-            icon: FaTasks,
-            to: "/tasks",
-            color: "text-blue-500",
-        },
-        {
-            title: "খরচ যোগ",
-            icon: FaMoneyBillWave,
-            to: "/expenses",
-            color: "text-green-500",
-        },
-        {
-            title: "ডায়েরি লিখুন",
-            icon: MdOutlineNoteAlt,
-            to: "/diary",
-            color: "text-purple-500",
-        },
-        {
-            title: "গুরুত্বপূর্ণ তারিখ",
-            icon: FaCalendarAlt,
-            to: "/dates",
-            color: "text-red-500",
-        },
-    ],
     recentActivities: [
         {
             type: "task",
@@ -151,18 +128,14 @@ const demoData = {
     ],
 };
 
-// --- হোম কম্পোনেন্ট ---
 const Home = () => {
-    // দৈনিক মেসেজ স্টেট ম্যানেজমেন্ট
     const [randomMessage, setRandomMessage] = useState({});
 
-    // useEffect: কম্পোনেন্ট মাউন্ট হওয়ার সময় একবার র্যান্ডম মেসেজ সেট করবে
     useEffect(() => {
         const randomIndex = Math.floor(Math.random() * dailyMessages.length);
         setRandomMessage(dailyMessages[randomIndex]);
     }, []);
 
-    // নিশ্চিত করার জন্য যে মেসেজটি লোড হয়েছে
     const isMessageLoaded = useMemo(
         () => Object.keys(randomMessage).length > 0,
         [randomMessage]
@@ -191,9 +164,6 @@ const Home = () => {
                         {/* Daily Motivational Message */}
                         {isMessageLoaded && (
                             <GlassCard className="max-w-xl text-center p-6">
-                                <IoIosTimer
-                                    className={`text-4xl mx-auto mb-2 ${TEXT_PRIMARY_COLOR_CLASS}`}
-                                />
                                 <p
                                     className={`text-lg font-bold ${TEXT_PRIMARY_COLOR_CLASS} mb-2`}
                                 >
@@ -212,38 +182,66 @@ const Home = () => {
             {/* 2. Quick Actions */}
             <div className="px-4 mt-8">
                 <h2
-                    className={`text-xl font-bold text-gray-800 mb-3 ${TEXT_PRIMARY_COLOR_CLASS}`}
+                    className={`flex items-center gap-2 text-xl font-bold text-gray-800 mb-3 ${TEXT_PRIMARY_COLOR_CLASS}`}
                 >
+                    <MdCheckCircle className="text-[24px] text-[#f88833]" />{" "}
                     কুইক অ্যাকশন
                 </h2>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                    {demoData.quickActions.map((action, index) => (
-                        <Link to={action.to} key={index}>
-                            <GlassCard className="flex flex-col items-center justify-center text-center p-4 hover:scale-[1.03]">
-                                <action.icon
-                                    className={`text-3xl mb-2 ${action.color}`}
-                                />
-                                <p className="text-sm font-semibold text-gray-700">
-                                    {action.title}
-                                </p>
-                            </GlassCard>
-                        </Link>
-                    ))}
+                    <Link to={"/"}>
+                        <GlassCard className="flex flex-col items-center justify-center text-center p-4 hover:scale-[1.03]">
+                            <FaTasks className="text-[#f88833]" size={30} />
+                            <p className="mt-2 text-sm font-semibold text-gray-700">
+                                সুমুর কাজের তালিকা
+                            </p>
+                        </GlassCard>
+                    </Link>
+                    <Link to={"/"}>
+                        <GlassCard className="flex flex-col items-center justify-center text-center p-4 hover:scale-[1.03]">
+                            <FaBookOpen className="text-[#f88833]" size={30} />
+                            <p className="mt-2 text-sm font-semibold text-gray-700">
+                                ডায়েরি লিখুন
+                            </p>
+                        </GlassCard>
+                    </Link>
+                    <Link to={"/"}>
+                        <GlassCard className="flex flex-col items-center justify-center text-center p-4 hover:scale-[1.03]">
+                            <LuMessageCircleHeart
+                                className="text-[#f88833]"
+                                size={30}
+                            />
+                            <p className="mt-2 text-sm font-semibold text-gray-700">
+                                মনের কথা
+                            </p>
+                        </GlassCard>
+                    </Link>
+                    <Link to={"/"}>
+                        <GlassCard className="flex flex-col items-center justify-center text-center p-4 hover:scale-[1.03]">
+                            <RiMusicAiFill
+                                className="text-[#f88833]"
+                                size={30}
+                            />
+                            <p className="mt-2 text-sm font-semibold text-gray-700">
+                                গানের প্লে-লিস্ট
+                            </p>
+                        </GlassCard>
+                    </Link>
                 </div>
             </div>
 
             {/* 3. Today's Overview (Summary) */}
             <div className="px-4 mt-8">
                 <h2
-                    className={`text-xl font-bold text-gray-800 mb-3 ${TEXT_PRIMARY_COLOR_CLASS}`}
+                    className={`flex items-center gap-2 text-xl font-bold text-gray-800 mb-3 ${TEXT_PRIMARY_COLOR_CLASS}`}
                 >
-                    আজকের সারাংশ
+                    <MdToday className="text-[24px] text-[#f88833]" /> আজকের
+                    সারাংশ
                 </h2>
                 <div className="grid grid-cols-2 gap-4">
                     {/* পেন্ডিং টাস্ক */}
                     <GlassCard className="bg-red-500/10 border-red-500/30">
-                        <div className="text-red-600 text-sm opacity-90">
-                            পেন্ডিং টাস্ক
+                        <div className="text-red-600 text-sm opacity-90 mb-2">
+                            সুমুর বাকি কাজ
                         </div>
                         <div className="text-gray-800 text-3xl font-bold">
                             {demoData.todaySummary.pendingTasks}
@@ -252,7 +250,7 @@ const Home = () => {
                     {/* সম্পন্ন টাস্ক */}
                     <GlassCard className="bg-green-500/10 border-green-500/30">
                         <div className="text-green-600 text-sm opacity-90">
-                            সম্পন্ন টাস্ক
+                            আজকে সম্পন্ন করেছেন
                         </div>
                         <div className="text-gray-800 text-3xl font-bold">
                             {demoData.todaySummary.completedTasks}
@@ -261,10 +259,10 @@ const Home = () => {
                     {/* মোট খরচ */}
                     <GlassCard className="bg-yellow-500/10 border-yellow-500/30">
                         <div className="text-yellow-600 text-sm opacity-90">
-                            মোট খরচ
+                            আজকের ডায়েরি
                         </div>
                         <div className="text-gray-800 text-3xl font-bold">
-                            {demoData.todaySummary.totalExpenses}৳
+                            {demoData.todaySummary.totalExpenses}
                         </div>
                     </GlassCard>
                     {/* আসন্ন ঘটনা */}
@@ -284,7 +282,8 @@ const Home = () => {
                 <h2
                     className={`text-xl font-bold text-gray-800 mb-3 ${TEXT_PRIMARY_COLOR_CLASS} flex items-center gap-2`}
                 >
-                    <MdHistory /> সাম্প্রতিক কার্যকলাপ
+                    <MdHistory className="text-[24px] text-[#f88833]" />{" "}
+                    সাম্প্রতিক কার্যকলাপ
                 </h2>
                 <div className="space-y-3">
                     {demoData.recentActivities.map((activity, index) => (

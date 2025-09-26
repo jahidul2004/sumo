@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import React, { useState, useMemo, useRef } from "react";
+import { useState, useMemo, useRef } from "react";
 import {
     MdOutlineAddTask,
     MdSearch,
@@ -10,11 +10,9 @@ import { CgCloseO } from "react-icons/cg";
 import { FaBirthdayCake, FaGift } from "react-icons/fa";
 import { AiFillHeart } from "react-icons/ai";
 
-// আপনার প্রাইমারি কালার
 const PRIMARY_COLOR = "#f88833";
 const PRIMARY_COLOR_CLASS = "text-[#f88833]";
 
-// iOS Waterglass (Glassmorphism) Card Style
 const GlassCard = ({ children, className = "" }) => (
     <div
         className={`
@@ -26,7 +24,6 @@ const GlassCard = ({ children, className = "" }) => (
     </div>
 );
 
-// --- ডেমো ডেটা ---
 const initialDates = [
     {
         id: 1,
@@ -64,7 +61,7 @@ const initialDates = [
         date: "2025-09-27",
         title: "ইমেইল চেক করার শেষ সময়",
         icon: MdEventNote,
-    }, // আজকের পরের দিন
+    },
     {
         id: 8,
         date: "2025-11-10",
@@ -73,11 +70,9 @@ const initialDates = [
     },
 ];
 
-// --- 1. নতুন তারিখ যোগ করার Modal ---
 const AddDateModal = ({ modalRef, closeModal }) => {
     const handleAdd = (e) => {
         e.preventDefault();
-        // ডেমো: ডেটা যোগ করার লজিক এখানে
         console.log("Adding new important date...");
         closeModal();
     };
@@ -133,25 +128,20 @@ const AddDateModal = ({ modalRef, closeModal }) => {
     );
 };
 
-// --- 2. মূল ImportantDates কম্পোনেন্ট ---
 const ImportantDates = () => {
     const [dates, setDates] = useState(initialDates);
     const [searchTerm, setSearchTerm] = useState("");
     const addModalRef = useRef(null);
 
-    // Modal কন্ট্রোল
     const openAddModal = () => addModalRef.current?.showModal();
     const closeAddModal = () => addModalRef.current?.close();
 
-    // আজকের তারিখ (সময় ছাড়া)
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
-    // --- সর্টিং ও সার্চিং লজিক ---
     const sortedAndFilteredDates = useMemo(() => {
         let tempDates = [...dates];
 
-        // 1. সার্চিং (টাইটেল বা তারিখ)
         if (searchTerm.trim()) {
             const lowerCaseSearch = searchTerm.toLowerCase();
             tempDates = tempDates.filter(
@@ -161,9 +151,6 @@ const ImportantDates = () => {
             );
         }
 
-        // 2. সর্টিং
-        // আজকের দিনের সাপেক্ষে পরবর্তী তারিখগুলো সবার আগে আসবে।
-        // অতীত হয়ে যাওয়া তারিখগুলো সবার নিচে চলে যাবে।
         tempDates.sort((a, b) => {
             const dateA = new Date(a.date);
             const dateB = new Date(b.date);
@@ -171,20 +158,19 @@ const ImportantDates = () => {
             const isFutureA = dateA >= today;
             const isFutureB = dateB >= today;
 
-            if (isFutureA && !isFutureB) return -1; // A ভবিষ্যতে, B অতীতে -> A আগে
-            if (!isFutureA && isFutureB) return 1; // A অতীতে, B ভবিষ্যতে -> B আগে
+            if (isFutureA && !isFutureB) return -1;
+            if (!isFutureA && isFutureB) return 1;
 
             if (isFutureA && isFutureB) {
-                return dateA - dateB; // দুটিই ভবিষ্যতে -> যেটি আগে আসবে সেটি উপরে
+                return dateA - dateB;
             } else {
-                return dateB - dateA; // দুটিই অতীতে -> যেটি সম্প্রতি অতীতে গেছে (অর্থাৎ তারিখ বড়) সেটি উপরে
+                return dateB - dateA;
             }
         });
 
         return tempDates;
     }, [dates, searchTerm]);
 
-    // একটি গুরুত্বপূর্ণ তারিখের জন্য একটি ছোট আইকন রেন্ডারার
     const IconRenderer = ({ date, icon: Icon }) => {
         const dateObj = new Date(date);
         const diffTime = dateObj.getTime() - today.getTime();
@@ -198,7 +184,6 @@ const ImportantDates = () => {
         } else if (diffDays > 0) {
             daysText = `${diffDays} দিন বাকি`;
         } else {
-            // অতীত হয়ে যাওয়া তারিখের জন্য
             daysText = "অতীত";
         }
 
@@ -223,7 +208,6 @@ const ImportantDates = () => {
 
     return (
         <div className="bg-gray-50 min-h-screen pb-20">
-            {/* 1. Header Section (Sticky) */}
             <div className="p-4 pt-8 sticky top-0 bg-gray-50/80 backdrop-blur-sm z-30">
                 <div
                     style={{ backgroundColor: PRIMARY_COLOR }}
@@ -273,8 +257,6 @@ const ImportantDates = () => {
                                     {item.date}
                                 </p>
                             </div>
-
-                            {/* ডানপাশে আইকন ও দিন গণনা */}
                             <IconRenderer
                                 date={item.date}
                                 icon={item.icon || MdEventNote}
