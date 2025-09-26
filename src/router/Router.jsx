@@ -9,6 +9,7 @@ import SalahStreak from "../pages/salahStreak/SalahStreak";
 import Credential from "../pages/credential/Credential";
 import Files from "../pages/files/Files";
 import ContactList from "../pages/contactList/ContactList";
+import FavoriteBooks from "../pages/favoriteBooks/FavoriteBooks";
 
 const router = createBrowserRouter([
     {
@@ -50,6 +51,10 @@ const router = createBrowserRouter([
             {
                 path: "/contacts",
                 element: <ContactList></ContactList>,
+            },
+            {
+                path: "/favorite-books",
+                element: <FavoriteBooks></FavoriteBooks>,
             },
         ],
     },
