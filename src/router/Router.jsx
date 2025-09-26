@@ -7,6 +7,7 @@ import Events from "../pages/diary/Diary";
 import ImportantDates from "../pages/importantDates/ImportantDates";
 import SalahStreak from "../pages/salahStreak/SalahStreak";
 import Credential from "../pages/credential/Credential";
+import Files from "../pages/files/Files";
 
 const router = createBrowserRouter([
     {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
             {
                 path: "/credentials",
                 element: <Credential></Credential>,
+            },
+            {
+                path: "/files",
+                element: <Files></Files>,
             },
         ],
     },
