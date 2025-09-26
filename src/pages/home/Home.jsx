@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { CgProfile } from "react-icons/cg";
 import { Link } from "react-router-dom";
 

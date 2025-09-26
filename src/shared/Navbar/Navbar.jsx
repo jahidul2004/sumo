@@ -11,7 +11,7 @@ const navItems = [
     { name: "Medical", icon: FaNotesMedical, path: "/events" },
     { name: "Home", icon: RiHome9Line, path: "/" },
     { name: "Calendar", icon: PiCalendarHeartBold, path: "/dates" },
-    { name: "Coin", icon: HiOutlineViewGrid, path: "/others" },
+    { name: "Coin", icon: HiOutlineViewGrid, path: "/more" },
 ];
 
 const Navbar = () => {

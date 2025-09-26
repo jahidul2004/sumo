@@ -1,6 +1,7 @@
 import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/home/Home";
+import More from "../pages/more/More";
 
 const router = createBrowserRouter([
     {
@@ -16,8 +17,8 @@ const router = createBrowserRouter([
                 element: <div>Tasks Page</div>,
             },
             {
-                path: "/others",
-                element: <div>Others Page</div>,
+                path: "/more",
+                element: <More></More>,
             },
             {
                 path: "/events",
