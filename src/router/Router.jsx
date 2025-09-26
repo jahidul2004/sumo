@@ -8,6 +8,7 @@ import ImportantDates from "../pages/importantDates/ImportantDates";
 import SalahStreak from "../pages/salahStreak/SalahStreak";
 import Credential from "../pages/credential/Credential";
 import Files from "../pages/files/Files";
+import ContactList from "../pages/contactList/ContactList";
 
 const router = createBrowserRouter([
     {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
             {
                 path: "/files",
                 element: <Files></Files>,
+            },
+            {
+                path: "/contacts",
+                element: <ContactList></ContactList>,
             },
         ],
     },
