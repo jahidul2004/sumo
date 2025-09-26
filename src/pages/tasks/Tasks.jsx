@@ -320,16 +320,13 @@ const Tasks = () => {
     return (
         <div className="bg-gray-50 min-h-screen pb-20">
             {" "}
-            {/* গ্লাস-মর্ফিজম এর জন্য হালকা ব্যাকগ্রাউন্ড */}
-            {/* 1. Header Section */}
             <div className="p-4 sticky top-0 bg-gray-50/80 backdrop-blur-sm z-30">
                 {" "}
-                {/* স্টিকি ও ব্লারড হেডার */}
                 <div
                     style={{ backgroundColor: PRIMARY_COLOR }}
                     className="rounded-2xl shadow-xl py-3 px-4 max-w-lg mx-auto flex justify-between items-center"
                 >
-                    <h1 className="text-white text-2xl font-bold">কাজসমূহ</h1>
+                    <h1 className="text-white text-2xl font-bold">সুমুর কাজের বই</h1>
                     <button
                         onClick={openAddModal}
                         className="bg-white/30 p-3 rounded-xl hover:bg-white/50 transition-colors shadow-md"
