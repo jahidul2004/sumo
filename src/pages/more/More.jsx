@@ -32,7 +32,7 @@ const moreMenuItems = [
     {
         title: "নামাজের স্ট্রিক",
         icon: FaPrayingHands,
-        to: "/salah-streak",
+        to: "/salahStreak",
         color: "text-green-500",
     },
     {

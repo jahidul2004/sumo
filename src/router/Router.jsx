@@ -5,6 +5,7 @@ import More from "../pages/more/More";
 import Tasks from "../pages/tasks/Tasks";
 import Events from "../pages/diary/Diary";
 import ImportantDates from "../pages/importantDates/ImportantDates";
+import SalahStreak from "../pages/salahStreak/SalahStreak";
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
             {
                 path: "/dates",
                 element: <ImportantDates></ImportantDates>,
+            },
+            {
+                path: "/salahStreak",
+                element: <SalahStreak></SalahStreak>,
             },
         ],
     },

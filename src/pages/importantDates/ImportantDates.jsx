@@ -169,7 +169,7 @@ const ImportantDates = () => {
         });
 
         return tempDates;
-    }, [dates, searchTerm]);
+    }, [dates, searchTerm, today]);
 
     const IconRenderer = ({ date, icon: Icon }) => {
         const dateObj = new Date(date);
