@@ -2,6 +2,7 @@ import { createBrowserRouter } from "react-router-dom";
 import MainLayout from "../layouts/MainLayout";
 import Home from "../pages/home/Home";
 import More from "../pages/more/More";
+import Tasks from "../pages/tasks/Tasks";
 
 const router = createBrowserRouter([
     {
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/tasks",
-                element: <div>Tasks Page</div>,
+                element: <Tasks></Tasks>,
             },
             {
                 path: "/more",
