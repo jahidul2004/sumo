@@ -15,6 +15,7 @@ import Login from "../auth/Login";
 import Register from "../auth/Register";
 import UnAuthRoute from "./authRoute/UnAuthRoute";
 import AuthRoute from "./authRoute/AuthRoute";
+import Profile from "../pages/profile/Profile";
 
 const router = createBrowserRouter([
     {
@@ -64,6 +65,10 @@ const router = createBrowserRouter([
             {
                 path: "/favorite-books",
                 element: <FavoriteBooks></FavoriteBooks>,
+            },
+            {
+                path: "/profile",
+                element: <Profile></Profile>,
             },
         ],
     },
