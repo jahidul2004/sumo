@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { CgCloseO } from "react-icons/cg";
 import {
     MdOutlineAddTask,
@@ -6,6 +6,7 @@ import {
     MdOutlineEdit,
 } from "react-icons/md";
 import { IoIosHeart } from "react-icons/io";
+import AuthContext from "../../context/AuthContext/AuthContext";
 
 // আপনার নতুন প্রাইমারি কালার
 const PRIMARY_COLOR = "#f88833";
@@ -186,93 +187,22 @@ const AddTaskModal = ({ closeModal, handleAddTask }) => {
 
 // --- 3. মূল Tasks কম্পোনেন্ট ---
 const Tasks = () => {
-    const [tasks, setTasks] = useState([
-        {
-            id: 1,
-            title: "ডিজাইন প্রেজেন্টেশন তৈরি",
-            description: "নতুন প্রজেক্টের জন্য প্রেজেন্টেশন স্লাইড বানানো",
-            completed: false,
-            priority: "High",
-            dueDate: "2025-09-28",
-        },
-        {
-            id: 2,
-            title: "হোমওয়ার্ক সম্পন্ন করা",
-            description: "কম্পিউটার প্রযুক্তি বিষয়ে assignment শেষ করা",
-            completed: true,
-            completedAt: "2025-09-24",
-            priority: "Medium",
-            dueDate: "2025-09-26",
-        },
-        {
-            id: 3,
-            title: "বই পড়া",
-            description: "প্রিয় বই থেকে ৫০ পৃষ্ঠা পড়া",
-            completed: false,
-            priority: "Low",
-            dueDate: "2025-09-30",
-        },
-        {
-            id: 4,
-            title: "মোবাইল অ্যাপ আপডেট করা",
-            description: "নতুন version install করে check করা",
-            completed: false,
-            priority: "Medium",
-            dueDate: "2025-09-27",
-        },
-        {
-            id: 5,
-            title: "ডিজিটাল মার্কেটিং নোটস তৈরি",
-            description: "SEO ও content strategy নিয়ে notes বানানো",
-            completed: true,
-            completedAt: "2025-09-23",
-            priority: "High",
-            dueDate: "2025-09-25",
-        },
-        {
-            id: 6,
-            title: "ফুটবল প্র্যাকটিস",
-            description: "স্থানীয় মাঠে এক ঘন্টার প্র্যাকটিস",
-            completed: false,
-            priority: "Low",
-            dueDate: "2025-09-26",
-        },
-        {
-            id: 7,
-            title: "ইমেইল চেক করা",
-            description: "প্রজেক্ট update এবং client email review করা",
-            completed: true,
-            completedAt: "2025-09-24",
-            priority: "Medium",
-            dueDate: "2025-09-26",
-        },
-        {
-            id: 8,
-            title: "ডিজাইন সফটওয়্যার আপডেট",
-            description: "Adobe Photoshop & Illustrator আপডেট করা",
-            completed: false,
-            priority: "High",
-            dueDate: "2025-09-29",
-        },
-        {
-            id: 9,
-            title: "মেডিটেশন / ধ্যান",
-            description: "দিনে ২০ মিনিট ধ্যান করা",
-            completed: false,
-            priority: "Medium",
-            dueDate: "2025-09-26",
-        },
-        {
-            id: 10,
-            title: "ব্লগ পোস্ট লেখা",
-            description: "React project এর tutorial লিখা",
-            completed: false,
-            priority: "High",
-            dueDate: "2025-09-28",
-        },
-    ]);
+    const [tasks, setTasks] = useState([]);
+    const { user } = useContext(AuthContext);
 
     const [selectedTask, setSelectedTask] = useState(null);
+
+    useEffect(() => {
+        fetch(`http://localhost:3000/api/tasks/by-email/${user?.email}`)
+            .then((res) => res.json())
+            .then((data) => {
+                setTasks(data);
+                console.log("Data Vhai", data);
+            })
+            .catch((error) => {
+                console.error("Error fetching tasks:", error);
+            });
+    }, [tasks, user?.email]);
 
     // টাস্ক ডিলিট হ্যান্ডলার
     const handleDeleteTask = (id) => {
@@ -326,7 +256,9 @@ const Tasks = () => {
                     style={{ backgroundColor: PRIMARY_COLOR }}
                     className="rounded-2xl shadow-xl py-3 px-4 max-w-lg mx-auto flex justify-between items-center"
                 >
-                    <h1 className="text-white text-2xl font-bold">সুমুর কাজের বই</h1>
+                    <h1 className="text-white text-2xl font-bold">
+                        সুমুর কাজের বই
+                    </h1>
                     <button
                         onClick={openAddModal}
                         className="bg-white/30 p-3 rounded-xl hover:bg-white/50 transition-colors shadow-md"
