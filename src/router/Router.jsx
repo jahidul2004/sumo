@@ -13,11 +13,17 @@ import FavoriteBooks from "../pages/favoriteBooks/FavoriteBooks";
 import LoginRegistrationLayout from "../layouts/LoginRegistrationLayout";
 import Login from "../auth/Login";
 import Register from "../auth/Register";
+import UnAuthRoute from "./authRoute/UnAuthRoute";
+import AuthRoute from "./authRoute/AuthRoute";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <MainLayout></MainLayout>,
+        element: (
+            <AuthRoute>
+                <MainLayout></MainLayout>
+            </AuthRoute>
+        ),
         children: [
             {
                 path: "/",
@@ -63,7 +69,11 @@ const router = createBrowserRouter([
     },
     {
         path: "/auth",
-        element: <LoginRegistrationLayout></LoginRegistrationLayout>,
+        element: (
+            <UnAuthRoute>
+                <LoginRegistrationLayout></LoginRegistrationLayout>
+            </UnAuthRoute>
+        ),
         children: [
             {
                 path: "login",
