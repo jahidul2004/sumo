@@ -1,4 +1,4 @@
-import { useEffect, useState, useMemo } from "react";
+import { useEffect, useState, useMemo, useContext } from "react";
 import { Link } from "react-router-dom";
 import { CgProfile } from "react-icons/cg";
 import {
@@ -19,6 +19,7 @@ import {
 import { IoIosTimer } from "react-icons/io";
 import { LuMessageCircleHeart } from "react-icons/lu";
 import { RiMusicAiFill } from "react-icons/ri";
+import AuthContext from "../../context/AuthContext/AuthContext";
 
 const PRIMARY_COLOR = "#f88833";
 const PRIMARY_GRADIENT = "from-[#f88833] to-orange-400";
@@ -88,10 +89,6 @@ const dailyMessages = [
 ];
 
 const demoData = {
-    user: {
-        name: "জিহাদ",
-        greeting: "শুভ সন্ধ্যা",
-    },
     todaySummary: {
         pendingTasks: 3,
         completedTasks: 5,
@@ -129,6 +126,7 @@ const demoData = {
 };
 
 const Home = () => {
+    const { user } = useContext(AuthContext);
     const [randomMessage, setRandomMessage] = useState({});
 
     useEffect(() => {
@@ -151,7 +149,7 @@ const Home = () => {
                     <div className="bg-white/20 backdrop-blur-sm rounded-2xl p-4">
                         <div className="flex justify-between items-center mb-4">
                             <h2 className="text-2xl font-bold text-white">
-                                {demoData.user.greeting}, {demoData.user.name}!
+                                Hi, {user?.displayName}!
                             </h2>
                             <Link
                                 to={"/profile"}

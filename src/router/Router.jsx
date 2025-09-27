@@ -10,6 +10,9 @@ import Credential from "../pages/credential/Credential";
 import Files from "../pages/files/Files";
 import ContactList from "../pages/contactList/ContactList";
 import FavoriteBooks from "../pages/favoriteBooks/FavoriteBooks";
+import LoginRegistrationLayout from "../layouts/LoginRegistrationLayout";
+import Login from "../auth/Login";
+import Register from "../auth/Register";
 
 const router = createBrowserRouter([
     {
@@ -55,6 +58,20 @@ const router = createBrowserRouter([
             {
                 path: "/favorite-books",
                 element: <FavoriteBooks></FavoriteBooks>,
+            },
+        ],
+    },
+    {
+        path: "/auth",
+        element: <LoginRegistrationLayout></LoginRegistrationLayout>,
+        children: [
+            {
+                path: "login",
+                element: <Login></Login>,
+            },
+            {
+                path: "register",
+                element: <Register></Register>,
             },
         ],
     },
